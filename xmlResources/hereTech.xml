@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Here Tech test" parallel="none">
+
+
+    <test name="Desktop.Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="hereTech.hereTechTests"></class>
+        </classes>
+    </test>
+
+   <!-- <test name="Desktop.Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="hereTech.hereTechTests"></class>
+        </classes>
+    </test>
+
+    <test name="Desktop.InternetExplorer">
+        <parameter name="browser" value="IE"/>
+        <classes>
+            <class name="hereTech.hereTechTests"></class>
+        </classes>
+    </test>-->
+
+</suite>
