@@ -24,6 +24,7 @@ import resources.ReadExcelFile;
 
 import java.io.*;
 import java.time.Duration;
+import java.util.List;
 
 public class hereTechTests extends Base {
 
@@ -204,12 +205,27 @@ public class hereTechTests extends Base {
 
             pepperFryPageObj.searchButton.click();
 
-            Thread.sleep(5000);
+            Thread.sleep(4000);
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].click();", pepperFryPageObj.lowestPriceRadio);
 
-//verifying that the radio is selected
+            //verifying that the radio is selected
             assertion.assertTrue(pepperFryPageObj.lowestPriceRadio.isSelected());
+            //waiting till search box appear
+            wait.until(ExpectedConditions.elementToBeClickable(pepperFryPageObj.closeLayer));
+            pepperFryPageObj.closeLayer.click();
+
+            List<WebElement> price = pepperFryPageObj.priceOfElement;
+            for(int i = 0; i<=price.size()-1;i++){
+                String priceText = price.get(i).getText().replace("₹ ","");
+                System.out.println(priceText);
+                Integer priceNum = Integer.parseInt(String.valueOf(priceText));
+                String priceTextNextElement = price.get(i+1).getText().replace("₹ ","");
+                System.out.println(priceTextNextElement);
+                Integer priceNumSecond = Integer.parseInt(priceTextNextElement);
+                Assert.assertTrue(priceNum<=priceNumSecond,"Price at the first element "+priceNum+" Is smaller than or equal to "+priceNumSecond);
+
+            }
 
             assertion.assertAll();
         }
@@ -250,6 +266,24 @@ public class hereTechTests extends Base {
             //verifying that the radio is selected
             assertion.assertTrue(pepperFryPageObj.lowestPriceRadio.isSelected(), "is selected");
 
+            //verifying that the radio is selected
+            assertion.assertTrue(pepperFryPageObj.lowestPriceRadio.isSelected());
+            //waiting till search box appear
+            wait.until(ExpectedConditions.elementToBeClickable(pepperFryPageObj.closeLayer));
+            pepperFryPageObj.closeLayer.click();
+
+            List<WebElement> price = pepperFryPageObj.priceOfElement;
+            for(int i = 0; i<=price.size()-1;i++){
+                String priceText = price.get(i).getText().replace("₹ ","");
+                System.out.println(priceText);
+                Integer priceNum = Integer.parseInt(String.valueOf(priceText));
+                String priceTextNextElement = price.get(i+1).getText().replace("₹ ","");
+                System.out.println(priceTextNextElement);
+                Integer priceNumSecond = Integer.parseInt(priceTextNextElement);
+                Assert.assertTrue(priceNum<=priceNumSecond,"Price at the first element "+priceNum+" Is smaller than or equal to second element "+priceNumSecond);
+
+            }
+
             assertion.assertAll();
         }
         catch (Exception e){
@@ -278,6 +312,7 @@ public class hereTechTests extends Base {
 
             pepperFryPageObj.searchButton.click();
 
+            wait.until(ExpectedConditions.visibilityOf(pepperFryPageObj.sortBySection));
             assertTrue(pepperFryPageObj.sortBySection.isDisplayed(),"Results are found");
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].click();", pepperFryPageObj.lowestPriceRadio);
@@ -301,7 +336,6 @@ public class hereTechTests extends Base {
             e.printStackTrace();
         }
     }
-
 
     @Parameters({"browser"})
     @Test(priority = 05, description = "TC-06 : Verify Google maps")

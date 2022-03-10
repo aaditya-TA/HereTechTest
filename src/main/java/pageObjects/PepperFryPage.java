@@ -28,6 +28,12 @@ public class PepperFryPage extends Base {
     @FindBy(css = "[class='clipCard__price-offer']")
     public List<WebElement> priceOfMaterial;
 
+    @FindBy(css = "span[class='clipCard__price-offer']")
+    public List<WebElement> priceOfElement;
+
+    @FindBy(css = "div[class='popup-box gb-modal reg_modal']>a[class='popup-close']")
+    public WebElement closeLayer;
+
 
     public PepperFryPage(WebDriver driver){
         this.driver = driver;
